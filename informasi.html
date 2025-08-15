@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Galeri Foto Novan Kecap</title>
+    <style>
+        :root{
+            --bg:#f3f6fb; --card:#fff; --accent:#1e90ff; --muted:#6b7280;
+            font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+        }
+        *{box-sizing:border-box}
+        body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);padding:28px;color:#111}
+        .container{max-width:1100px;margin:0 auto}
+        h1{margin:0 0 16px;font-size:1.4rem}
+        .gallery{
+            display:grid;
+            gap:14px;
+            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+            align-items:start;
+        }
+        .card{
+            background:var(--card);border-radius:10px;overflow:hidden;
+            box-shadow:0 6px 18px rgba(16,24,40,0.06);
+            transition:transform .18s ease,box-shadow .18s ease;
+            cursor:pointer;display:flex;flex-direction:column;
+        }
+        .card:hover{transform:translateY(-6px);box-shadow:0 18px 36px rgba(16,24,40,0.08)}
+        .thumb{width:100%;height:160px;object-fit:cover;display:block;background:#eee}
+        .meta{padding:10px 12px;font-size:.95rem;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+        .meta .title{color:#111;font-weight:600}
+        .actions{display:flex;gap:8px}
+        .btn{
+            border:0;padding:6px 10px;border-radius:8px;background:transparent;color:var(--accent);font-weight:600;
+            cursor:pointer;font-size:.85rem
+        }
+        .btn.primary{background:var(--accent);color:#fff}
+        footer{margin-top:18px;color:var(--muted);font-size:.85rem}
+
+        /* Lightbox */
+        .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1200;padding:24px}
+        .lightbox.open{display:flex}
+        .viewer{max-width:1000px;width:100%;max-height:90vh;background:rgba(0,0,0,0.75);padding:14px;border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:8px}
+        .viewer img{max-width:100%;max-height:76vh;border-radius:6px;object-fit:contain;display:block}
+        .viewer .bar{width:100%;display:flex;justify-content:space-between;align-items:center;color:#fff}
+        .nav{display:flex;gap:8px}
+        .icon-btn{
+            background:transparent;border:1px solid rgba(255,255,255,0.2);color:#fff;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700
+        }
+
+        @media(min-width:900px){ .thumb{height:200px} }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Galeri (5 Foto)</h1>
+        <p style="margin-top:0;margin-bottom:12px;color:var(--muted);font-size:.95rem">
+            Klik gambar untuk memperbesar.
+        </p>
+
+        <div class="gallery" id="gallery">
+            <!-- Ganti src ke path gambar Anda -->
+            <div class="card" data-index="0">
+                <img class="thumb" src="images/foto1.jpg" alt="Foto 1" onerror="this.src='2.jpg'">
+                <div class="meta">
+                    <div>
+                        <div class="title">Foto 1</div>
+                        <div style="font-size:.82rem;color:var(--muted)">Deskripsi singkat</div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn" data-action="open">Buka</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="1">
+                <img class="thumb" src="images/foto2.jpg" alt="Foto 2" onerror="this.src='3.jpg'">
+                <div class="meta">
+                    <div>
+                        <div class="title">Foto 2</div>
+                        <div style="font-size:.82rem;color:var(--muted)">Deskripsi singkat</div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn" data-action="open">Buka</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="2">
+                <img class="thumb" src="images/foto3.jpg" alt="Foto 3" onerror="this.src='Gambar WhatsApp 2025-08-15 pukul 17.38.53_5f1297c5.jpg'">
+                <div class="meta">
+                    <div>
+                        <div class="title">Foto 3</div>
+                        <div style="font-size:.82rem;color:var(--muted)">Deskripsi singkat</div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn" data-action="open">Buka</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="3">
+                <img class="thumb" src="images/foto4.jpg" alt="Foto 4" onerror="this.src='4.jpg'">
+                <div class="meta">
+                    <div>
+                        <div class="title">Foto 4</div>
+                        <div style="font-size:.82rem;color:var(--muted)">Deskripsi singkat</div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn" data-action="open">Buka</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" data-index="4">
+                <img class="thumb" src="images/foto5.jpg" alt="Foto 5" onerror="this.src='5.jpg'">
+                <div class="meta">
+                    <div>
+                        <div class="title">Foto 5</div>
+                        <div style="font-size:.82rem;color:var(--muted)">Deskripsi singkat</div>
+                    </div>
+                    <div class="actions">
+                        <button class="btn" data-action="open">Buka</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>AMBANOVAN</footer>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+        <div class="viewer" role="dialog" aria-modal="true" aria-label="Preview gambar">
+            <div class="bar">
+                <div style="font-weight:700;color:#fff" id="lb-title">Foto</div>
+                <div class="nav">
+                    <a id="download" class="icon-btn" download target="_blank">Download</a>
+                    <button id="prev" class="icon-btn" title="Sebelumnya">‹</button>
+                    <button id="next" class="icon-btn" title="Berikutnya">›</button>
+                    <button id="close" class="icon-btn" title="Tutup">✕</button>
+                </div>
+            </div>
+            <img id="lb-img" src="" alt="">
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            const cards = Array.from(document.querySelectorAll('.card'));
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lb-img');
+            const lbTitle = document.getElementById('lb-title');
+            const download = document.getElementById('download');
+            let idx = 0;
+
+            function openAt(i){
+                const card = cards[i];
+                const img = card.querySelector('img');
+                idx = i;
+                lbImg.src = img.src;
+                lbImg.alt = img.alt || ('Foto ' + (i+1));
+                lbTitle.textContent = lbImg.alt;
+                download.href = lbImg.src;
+                lb.classList.add('open'); lb.setAttribute('aria-hidden','false');
+            }
+            function closeLB(){
+                lb.classList.remove('open'); lb.setAttribute('aria-hidden','true');
+                lbImg.src = '';
+            }
+            function next(){ openAt((idx+1) % cards.length) }
+            function prev(){ openAt((idx-1 + cards.length) % cards.length) }
+
+            // click handlers
+            cards.forEach((c,i)=>{
+                c.addEventListener('click', ()=> openAt(i));
+                const btn = c.querySelector('[data-action="open"]');
+                if(btn) btn.addEventListener('click', (e)=>{ e.stopPropagation(); openAt(i); });
+            });
+
+            // lightbox controls
+            document.getElementById('close').addEventListener('click', closeLB);
+            document.getElementById('next').addEventListener('click', next);
+            document.getElementById('prev').addEventListener('click', prev);
+
+            // close when clicking outside image
+            lb.addEventListener('click', (e)=>{
+                if(e.target === lb) closeLB();
+            });
+
+            // keyboard navigation
+            document.addEventListener('keydown', (e)=>{
+                if(lb.classList.contains('open')){
+                    if(e.key === 'Escape') closeLB();
+                    if(e.key === 'ArrowRight') next();
+                    if(e.key === 'ArrowLeft') prev();
+                }
+            });
+
+            // lazy-show high-res when thumb loads (optional)
+            // if you use very small thumbnails, you can set data-full on img and swap here.
+        })();
+    </script>
+</body>
+</html>
